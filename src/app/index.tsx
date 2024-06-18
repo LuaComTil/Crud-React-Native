@@ -1,10 +1,16 @@
-import { Text, View } from "react-native"
+import { Input } from "@/components/Input"
+import { useState } from "react"
+import { Button, View } from "react-native"
 
 export default function Index() {
-    return <View  style={{backgroundColor:"red",flex: 1, justifyContent:"center", alignItems:"center"}}>
-        <Text>
-            TESTE
-        </Text>
+    const [] = useState("")
+    const [] = useState("")
+    const [] = useState("")
+
+    return <View  style={{flex: 1, justifyContent:"center", padding: 32, gap: 16}}>
+        <Input placeholder="Name"></Input>
+        <Input placeholder="Amount"></Input>
+        <Button title="Save"/>
     </View>
 
 }
