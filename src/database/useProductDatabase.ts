@@ -1,7 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite"
 
 export type ProductDatabase = {
-
     id: number
     name: string
     quantity: number
@@ -26,6 +25,19 @@ export function useProductDatabase() {
         } catch (error) {
             throw error
         }
+        finally {
+            await statement.finalizeAsync()
+        }
     }
-    return { create }
+
+    async function searchByName(name: string) {
+        try {
+            const query = "SELECT * FROM products WHERE name LIKE ?"
+            const response = await database.getAllSync<ProductDatabase>(query,`%${name}%`)
+            return response
+        } catch (error) {
+            throw error
+        }
+    }
+    return { create, searchByName }
 }
