@@ -4,6 +4,7 @@ import { Alert, Button, FlatList, View } from "react-native"
 import { Input } from "@/components/Input"
 import { useProductDatabase, ProductDatabase } from "../database/useProductDatabase"
 import { Product } from "@/components/Product"
+import { router } from "expo-router"
 
 export default function Index() {
   const [id, setId] = useState("")
@@ -91,7 +92,7 @@ export default function Index() {
 
 
   return (
-    <View  style={{ flex: 1, justifyContent:"center", padding: 32, gap: 16}}>
+    <View style={{ paddingTop: 48 ,padding: 32, gap: 16}}>
       <Input placeholder="Name" onChangeText={setName} value={name}></Input>
       <Input placeholder="Quantity" onChangeText={setQuantity} value={quantity}></Input>
       <Button title="Save" onPress={handleSave}/>
@@ -104,6 +105,7 @@ export default function Index() {
               data={item}
               onPress={() => details(item)}
               onDelete={() => remove(item.id)}
+              onOpen={() => router.navigate("/details/" + item.id)}
             />)}
           contentContainerStyle={{ gap: 16}}
         />

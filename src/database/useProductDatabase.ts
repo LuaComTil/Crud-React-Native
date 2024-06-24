@@ -61,7 +61,7 @@ export function useProductDatabase() {
   }
 
 
-  async function remove(id:number) {
+  async function remove(id: number) {
     try {
       await database.execAsync("DELETE FROM products WHERE id = " + id)
     } catch (error) {
@@ -70,5 +70,16 @@ export function useProductDatabase() {
   }
 
 
-  return { create, searchByName, update, remove }
+  async function show(id: number) {
+    try {
+      const query = "SELECT * FROM products WHERE id = ?"
+      const response = await database.getFirstAsync<ProductDatabase>(query, [id,])
+      return response
+    } catch (error) {
+      throw error
+    }
+  }
+
+
+  return { create, searchByName, update, remove, show }
 }
